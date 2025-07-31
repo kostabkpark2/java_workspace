@@ -16,9 +16,14 @@ public class ArrayDemo {
 			scores[i] = 100;
 		}
 
+//		int sum = 0;
+//		for (int i = 0; i < scores.length; i++) {
+//			sum = sum + scores[i];
+//		}
+
 		int sum = 0;
-		for (int i = 0; i < scores.length; i++) {
-			sum = sum + scores[i];
+		for (int score : scores) { // for-each loop
+			sum = sum + score;
 		}
 
 		System.out.printf("학생 %d명의 점수의 합은 %d 입니다. \n", scores.length, sum);
