@@ -32,6 +32,6 @@ class Circle {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("원의 넓이(반지름 : %.1f) = %.2f \n", radius, findArea());
+		return String.format("원의 넓이(반지름 : %.1f) = %.2f", radius, findArea());
 	}
 }
