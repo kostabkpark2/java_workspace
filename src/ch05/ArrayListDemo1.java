@@ -25,21 +25,21 @@ public class ArrayListDemo1 {
 		// IndexOutOfBoundsException 발생
 		// size 가 3(index=0,1,2) 이었다가 2(index=0,1) 로 줄어드는데
 		// scores[2] 에 접근하기 때문
-//		for (int i = 0; i < scores.size(); i++) {
-//			if (scores.get(i) <= 50) {
-//				scores.remove(i);
-//			}
-//		}
+		for (int i = 0; i < scores.size(); i++) {
+			if (scores.get(i) <= 50) {
+				scores.remove(i--);
+			}
+		}
 		int count = scores.size();
 		// IndexOutOfBoundsException 발생하지 않도록
 		// size 가 3(index=2,1,0) 이었다가 2(index=1,0) 로 줄어들어도
 		// scores[0] 에 접근하므로 문제가 안됨
 
-		for (int i = count - 1; i >= 0; i--) {
-			if (scores.get(i) <= 50) {
-				scores.remove(i);
-			}
-		}
+//		for (int i = count - 1; i >= 0; i--) {
+//			if (scores.get(i) <= 50) {
+//				scores.remove(i);
+//			}
+//		}
 
 		// 동적 배열의 크기만큼 점수를 꺼내서 합계를 구하고, 평균을 구하여 출력
 		int sum = 0;
@@ -49,6 +49,7 @@ public class ArrayListDemo1 {
 		for (Integer item : scores) {
 			sum += item;
 		}
+		System.out.println(scores);
 		System.out.printf("학생 %d 명의 점수의 합은 %d 입니다. \n", scores.size(), sum);
 		System.out.printf("학생 %d 명의 점수의 평균은 %.2f 입니다.\n ", scores.size(), (sum / (double) scores.size()));
 	}
