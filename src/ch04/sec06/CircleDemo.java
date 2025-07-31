@@ -1,4 +1,4 @@
-package sec06;
+package ch04.sec06;
 
 public class CircleDemo {
 

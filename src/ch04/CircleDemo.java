@@ -9,7 +9,7 @@ public class CircleDemo {
 //		System.out.println("원의 넓이는 " + c.findArea());
 
 		Circle c1 = new Circle(2);
-		System.out.println("원의 반지름은 " + c1.getRadius());
+		c1.System.out.println("원의 반지름은 " + c1.getRadius());
 		System.out.println("원의 넓이는 " + c1.findArea());
 	}
 
