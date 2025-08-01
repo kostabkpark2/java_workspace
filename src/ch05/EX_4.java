@@ -10,7 +10,7 @@ public class EX_4 {
 		System.out.println(name);
 		System.out.println(Arrays.toString(name));
 		for (int i = 0; i < 10; i++) {
-			// System.out.println((int) (Math.random() * 3));
+//			System.out.println((int) (Math.floor(Math.random() * 3)));
 			int ind = (int) (Math.random() * 3);
 			System.out.println(name[ind]);
 		}
