@@ -41,13 +41,14 @@ public class EX_7 {
 		while (true) {
 			System.out.println(msg);
 			menu = in.nextLine();
-			if (menu.equals("4")) {
+			if (menu.equals("4")) { // switch () 로 리팩토링 가능
 				break;
 			} else if (menu.equals("3")) {
 				System.out.println("잔고 > " + balance);
 			} else if (menu.equals("2")) {
 				System.out.println("출금액> ");
-				money = Long.parseLong(in.nextLine());
+				money = in.nextLong();
+				in.nextLine();
 				if (balance >= money) {
 					balance -= money;
 				} else {
@@ -56,7 +57,8 @@ public class EX_7 {
 
 			} else if (menu.equals("1")) {
 				System.out.println("예금액> ");
-				money = Long.parseLong(in.nextLine());
+				money = in.nextLong();
+				in.nextLine();
 				balance += money;
 			} else {
 				System.out.println("메뉴 번호 확인하세요");
