@@ -21,7 +21,7 @@ public class UpcastingDemo {
 		pArr[0] = new Student();
 		pArr[1] = new Employee();
 		pArr[2] = new SportsPlayer();
-		pArr[3] = new Enterainer();
+		pArr[3] = new Entertainer();
 
 		for (Person person : pArr) {
 			person.whoAmI();
