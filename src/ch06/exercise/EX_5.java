@@ -10,7 +10,7 @@ public class EX_5 {
 				s.playGame();
 			} else if (phone instanceof Telephone t) {
 				t.autoAnswering();
-			} else {
+			} else if (phone instanceof Phone) {
 				phone.talk();
 			}
 		}
@@ -21,7 +21,9 @@ public class EX_5 {
 class Phone {
 	protected String owner;
 
+	// 생성자
 	public Phone(String owner) {
+		super();
 		this.owner = owner;
 	}
 
@@ -33,10 +35,12 @@ class Phone {
 class Telephone extends Phone {
 	private String when;
 
+	// 접근자
 	public String getWhen() {
-		return this.when;
+		return when;
 	}
 
+	// 생성자
 	public Telephone(String owner, String when) {
 		super(owner);
 		this.when = when;
@@ -50,10 +54,12 @@ class Telephone extends Phone {
 class Smartphone extends Telephone {
 	private String game;
 
+	// 접근자
 	public String getGame() {
-		return game;
+		return this.game;
 	}
 
+	// 생성자
 	public Smartphone(String owner, String game) {
 		super(owner, null);
 		this.game = game;
