@@ -30,6 +30,12 @@ class Line implements Comparable {
 		this.length = length;
 	}
 
+//	@Override
+//	public int hashCode() {
+//		// TODO Auto-generated method stub
+//		return length;
+//	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Line line) {
