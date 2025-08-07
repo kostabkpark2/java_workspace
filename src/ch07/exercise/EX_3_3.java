@@ -14,7 +14,7 @@ public class EX_3_3 {
 
 		Arrays.sort(books);
 
-		System.out.println("정렬 전");
+		System.out.println("정렬 후");
 		for (Book book : books) {
 			System.out.println(book);
 		}
