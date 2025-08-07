@@ -3,10 +3,12 @@ package ch07.exercise;
 public class EX_3_2 {
 
 	public static void main(String[] args) {
-		Triangle t1 = new Triangle(10, 10);
-		Triangle t2 = new Triangle(5, 10);
+		Triangle t1 = new Triangle(1, 2);
+		Triangle t2 = new Triangle(1, 3);
+		Line l1 = new Line(10);
 
-		int res = t1.compareTo(t2);
+		// int res = t1.compareTo(t2);
+		int res = t1.compareTo(l1);
 		if (res > 0) {
 			System.out.println(t1 + " 이 더 큽니다.");
 		} else if (res != -9999999 && res < 0) {
@@ -30,13 +32,20 @@ class Triangle implements Comparable {
 	}
 
 	private double findArea() {
-		return (width * height) / 2;
+		return (width * height) / (double) 2;
 	}
 
 	@Override
 	public int compareTo(Object o) {
 		if (o instanceof Triangle t) {
-			return (int) (findArea() - t.findArea());
+			double comp = findArea() - t.findArea();
+			if (comp < 0) {
+				return -1;
+			} else if (comp > 0) {
+				return 1;
+			} else {
+				return 0;
+			}
 		}
 		return -9999999;
 	}
