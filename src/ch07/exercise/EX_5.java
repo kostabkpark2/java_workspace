@@ -13,10 +13,10 @@ public class EX_5 {
 
 }
 
-abstract class Controllable {
+abstract class Controller {
 	boolean power;
 
-	public Controllable(boolean power) {
+	public Controller(boolean power) {
 		this.power = power;
 	}
 
@@ -31,7 +31,7 @@ abstract class Controllable {
 	abstract String getName();
 }
 
-class TV extends Controllable {
+class TV extends Controller {
 
 	@Override
 	String getName() {
@@ -44,7 +44,7 @@ class TV extends Controllable {
 
 }
 
-class Radio extends Controllable {
+class Radio extends Controller {
 
 	@Override
 	String getName() {
