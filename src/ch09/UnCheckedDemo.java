@@ -22,7 +22,7 @@ public class UnCheckedDemo {
 		while (st.hasMoreTokens()) {
 			st.nextToken();
 		}
-		st.nextToken();
+		st.nextToken(); // NoSuchElementException);e.printStackTrace();
 	}
 
 }
