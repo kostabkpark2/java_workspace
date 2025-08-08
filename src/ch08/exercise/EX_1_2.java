@@ -7,7 +7,12 @@ public class EX_1_2 {
 	public static void main(String[] args) {
 		Person p1 = new Person("111111", "홍길동");
 		Person p2 = new Person("111111", "홍길동");
-		Person p3 = new Person("123456", "손흥민");
+		Person p3 = new Person("111111", "손흥민");
+
+		System.out.println(p1);
+
+		System.out.println("hello" == "hello");
+		System.out.println("hello".equals("hello"));
 
 		if (p1.equals(p2)) {
 			System.out.println("같은 사람이다.");
@@ -27,6 +32,11 @@ public class EX_1_2 {
 class Person {
 	String number;
 	String name;
+	String school;
+	String address;
+	String car;
+	int age;
+	int height;
 
 	public Person(String number, String name) {
 		this.number = number;
@@ -39,8 +49,8 @@ class Person {
 			return true;
 		}
 		if (obj instanceof Person p) {
-			// return this.hashCode() == p.hashCode();
-			return (number.equals(p.number) && name.equals(p.name));
+			return this.hashCode() == p.hashCode();
+			// return (number.equals(p.number) && name.equals(p.name));
 		}
 		return false;
 	}
@@ -49,5 +59,10 @@ class Person {
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return Objects.hash(number, name);
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
