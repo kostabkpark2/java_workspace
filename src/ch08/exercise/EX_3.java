@@ -12,7 +12,7 @@ public class EX_3 {
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH) + 1;
 		int day = c.get(Calendar.DATE);
-		String week = weekName[c.get(Calendar.DAY_OF_WEEK)];
+		String week = weekName[c.get(Calendar.DAY_OF_WEEK) - 1];
 		String noon = noonName[c.get(Calendar.AM_PM)];
 		int hour = c.get(Calendar.HOUR);
 		int minute = c.get(Calendar.MINUTE);
