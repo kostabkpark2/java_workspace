@@ -1,4 +1,4 @@
-package ch05;
+package ch05.exercise;
 
 import java.util.Scanner;
 
