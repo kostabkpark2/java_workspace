@@ -8,7 +8,7 @@ public class GenericMethod3 {
 
 		System.out.println(t1.compareTo(t2));
 
-		Ticket[] tickets = { new Ticket(10), new Ticket(5), new Ticket(3), new Ticket(7), new Ticket(4) };
+		Ticket[] tickets = { new Ticket(10), new Ticket(5), new Ticket(3), new Ticket(7), new Ticket(3) };
 		System.out.println(countGT(tickets, tickets[4]));
 
 	}
@@ -21,7 +21,6 @@ public class GenericMethod3 {
 				count++;
 			}
 		}
-
 		return count;
 	}
 
