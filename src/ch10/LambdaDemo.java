@@ -23,7 +23,7 @@ public class LambdaDemo {
 		MyFunction f = (a, b) -> a > b ? a : b;
 
 		int value = f.max(3, 5);
-		System.out.println(value);
+		System.out.println("최대값은 => " + value);
 
 		PrintFunction pf = (name, i) -> System.out.println(name + "=" + i);
 
@@ -33,20 +33,14 @@ public class LambdaDemo {
 
 		System.out.println(sf.square(3));
 
-		RollFunction rf = new RollFunction() {
+		RollFunction rf = () -> (int) (Math.random() * 6) + 1;
 
-			@Override
-			public int roll() {
-				// TODO Auto-generated method stub
-				return (int) (Math.random() * 6) + 1;
-			}
-
-		};
-
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			System.out.println(rf.roll());
 		}
 
+		YourFunction yf = (a, b) -> a < b ? a : b;
+		System.out.println("최소값은 => " + yf.min(3, 5));
 	}
 
 }
@@ -71,12 +65,7 @@ interface RollFunction {
 	int roll();
 }
 
-//class MyClass implements MyFunction {
-//
-//	@Override
-//	public int max(int a, int b) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//	
-//}
+@FunctionalInterface
+interface YourFunction {
+	int min(int a, int b);
+}
