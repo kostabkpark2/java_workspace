@@ -48,6 +48,9 @@ public class LambdaDemo {
 @FunctionalInterface
 interface MyFunction {
 	int max(int a, int b);
+
+	@Override
+	boolean equals(Object o);
 }
 
 @FunctionalInterface
