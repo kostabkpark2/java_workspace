@@ -61,7 +61,6 @@ class Beer extends Beverage {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Beer 입니다.";
 	}
 }
@@ -73,7 +72,6 @@ class Boricha extends Beverage {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Boricha 입니다.";
 	}
 }
