@@ -11,8 +11,10 @@ public class CollectionFrameworkDemo {
 		list.add("banana");
 		list.add("cherry");
 
+		System.out.println("문자열 리스트 출력");
 		list.forEach((s) -> System.out.println(s)); // Consumer 인터페이스의 구현체를 람다식으로 작성
 		list.removeIf((s) -> s.length() == 0); // Predicate 인터페이스의 구현체를 람다식으로 작성
+		System.out.println("빈 문자열 제외한 리스트 출력");
 		list.forEach((s) -> System.out.println(s)); // Consumer 인터페이스의 구현체를 람다식으로 작성
 
 		// 숫자를 원소로 가지는 ArrayList 를 작성해라. 그리고 원소를 4개 추가하는데 + : 2개 -: 2 개
@@ -23,8 +25,10 @@ public class CollectionFrameworkDemo {
 		numberList.add(15);
 		numberList.add(7);
 
+		System.out.println("숫자 리스트 출력");
 		numberList.forEach((n) -> System.out.println(n));
 		numberList.removeIf((n) -> n < 0); // Predicate 인터페이스의 구현체를 람다식으로 작성
+		System.out.println("양수 - 숫자 리스트 출력");
 		numberList.forEach((n) -> System.out.println(n));
 
 		// 객체(삼각형)을 원소로 가지는 ArrayList 를 작성해라. 원소를 3개 추가하는데 ( ) 밑변과 높이가 (10,3), (10,5),
