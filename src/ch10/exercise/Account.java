@@ -40,7 +40,20 @@ public class Account {
 		}
 	}
 
-	// 메서드
+	// 입금/출금 메서드
+	public void deposit(long money) {
+		balance += money;
+	}
+
+	public void withdraw(long money) {
+		if (balance < money) {
+			System.out.println("출금 잔액이 부족합니다");
+		} else {
+			balance -= money;
+			System.out.println("출금이 완료되었습니다.");
+		}
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

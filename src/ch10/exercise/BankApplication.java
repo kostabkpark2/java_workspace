@@ -28,6 +28,14 @@ public class BankApplication {
 				-------
 				계좌목록
 				-------""";
+		String msg3 = """
+				-------
+				예금
+				-------""";
+		String msg4 = """
+				-------
+				출금
+				-------""";
 
 		Scanner in = new Scanner(System.in);
 		Account[] accounts = new Account[100];
@@ -38,6 +46,7 @@ public class BankApplication {
 		long balance = 0;
 		String password = "";
 		String password1 = "";
+		long money = 0;
 		while (true) {
 			System.out.println(msg);
 			menu = in.nextLine();
@@ -46,7 +55,7 @@ public class BankApplication {
 				break;
 			}
 			switch (menu) {
-			case "1" -> {
+			case "1" -> { // 계좌생성
 				System.out.println(msg1);
 				System.out.print("계좌번호 : ");
 				accountNo = in.nextLine();
@@ -74,17 +83,42 @@ public class BankApplication {
 					}
 				}
 			}
-			case "2" -> {
+			case "2" -> { // 목록 출력
 				System.out.println(msg2);
 				for (int i = 0; i < index; i++) {
 					System.out.println(accounts[i]);
 				}
 			}
-			case "3" -> {
-				System.out.println("예금 처리 중");
+			case "3" -> { // 입금
+				System.out.println(msg3);
+				System.out.print("계좌번호 : ");
+				accountNo = in.nextLine();
+				System.out.print("입금액 : ");
+				money = Long.parseLong(in.nextLine());
+				int ind = findAccount(accounts, index, accountNo);
+				if (ind >= 0) { // 계좌를 찾은 경우
+					accounts[ind].deposit(money);
+					System.out.println("입금이 완료되었습니다.");
+				} else { // 해당 계좌를 못찾은 경우
+					System.out.println("입금할 계좌 정보가 없습니다.");
+				}
 			}
-			case "4" -> {
-				System.out.println("출금 처리 중");
+			case "4" -> { // 출금
+				System.out.println(msg4);
+				System.out.print("계좌번호 : ");
+				accountNo = in.nextLine();
+				int ind = findAccount(accounts, index, accountNo);
+				if (ind >= 0) { // 계좌를 찾은 경우
+					System.out.print("비밀번호 : ");
+					password = in.nextLine();
+					if (!password.isBlank() && accounts[ind].getPassword().equals(password)) {
+						System.out.print("출금액 : ");
+						money = Long.parseLong(in.nextLine());
+						accounts[ind].withdraw(money);
+					} else {
+						System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
+					}
+				}
 			}
 			default -> System.out.println("메뉴 번호를 확인하세요");
 			}
@@ -99,5 +133,14 @@ public class BankApplication {
 			}
 		}
 		return false;
+	}
+
+	private static int findAccount(Account[] arr, int size, String accountNo) {
+		for (int i = 0; i < size; i++) {
+			if (arr[i].getAccountNo().equals(accountNo)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }
