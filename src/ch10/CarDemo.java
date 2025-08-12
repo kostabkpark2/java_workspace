@@ -11,19 +11,28 @@ public class CarDemo {
 		System.out.println(list.size());
 		Car[] cars = list.toArray(new Car[3]);
 
+		Arrays.sort(cars);
+		System.out.println(Arrays.toString(cars));
+
 		Comparator<Car> modelComparator = Comparator.comparing(c -> c.getModel());
 
 		Arrays.sort(cars, modelComparator);
 		System.out.println(Arrays.toString(cars));
 
-		Comparator<Car> modelComparator2 = Comparator.comparing(c -> c.getMileage());
-
-		Arrays.sort(cars, modelComparator2);
+		Arrays.sort(cars, modelComparator.reversed());
 		System.out.println(Arrays.toString(cars));
 
-		Comparator<Car> modelComparator3 = Comparator.comparing(c -> c.getAge());
+		// Comparator<Car> mileageComparator = Comparator.comparing(c ->
+		// c.getMileage());
+		Comparator<Car> mileageComparator = Comparator.comparing(Car::getMileage);
 
-		Arrays.sort(cars, modelComparator3);
+		Arrays.sort(cars, mileageComparator);
+		System.out.println(Arrays.toString(cars));
+
+		// Comparator<Car> AgeComparator = Comparator.comparing(c -> c.getAge());
+		Comparator<Car> AgeComparator = Comparator.comparing(Car::getAge);
+
+		Arrays.sort(cars, AgeComparator.reversed());
 		System.out.println(Arrays.toString(cars));
 
 	}
