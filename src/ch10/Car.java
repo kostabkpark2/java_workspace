@@ -9,6 +9,7 @@ public class Car {
 	private int age;
 	private int mileage;
 
+	// 생성자
 	public Car(String model, boolean gasoline, int age, int mileage) {
 		this.model = model;
 		this.gasoline = gasoline;
@@ -16,6 +17,7 @@ public class Car {
 		this.mileage = mileage;
 	}
 
+	// 접근자
 	public String getModel() {
 		return model;
 	}
@@ -37,6 +39,7 @@ public class Car {
 		return String.format("Car(%s, %s, %d, %d)", model, gasoline, age, mileage);
 	}
 
+	// 초기 값 설정
 	public static final List<Car> cars = Arrays.asList(new Car("소나타", true, 18, 210000),
 			new Car("코란도", false, 15, 200000), new Car("그랜저", true, 12, 150000), new Car("싼타페", false, 10, 220000),
 			new Car("아반테", true, 10, 70000), new Car("에쿠스", true, 6, 100000), new Car("그랜저", true, 5, 80000),
