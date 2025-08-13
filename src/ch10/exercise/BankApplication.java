@@ -162,5 +162,4 @@ public class BankApplication {
 			System.out.println(accounts[i]);
 		}
 	}
-
 }
