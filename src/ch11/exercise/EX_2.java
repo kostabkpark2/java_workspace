@@ -2,6 +2,7 @@ package ch11.exercise;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 public class EX_2 {
@@ -37,5 +38,21 @@ class Person {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return String.format("Person[%s : %d]", name, age);
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return Objects.hash(name, age);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (obj instanceof Person p) {
+			return this.hashCode() == obj.hashCode();
+		}
+		return false;
 	}
 }
