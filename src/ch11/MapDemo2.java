@@ -18,8 +18,6 @@ public class MapDemo2 {
 		System.out.println(fruits.keySet());
 		System.out.println(fruits.values());
 
-		System.out.println(fruits.containsKey("사과"));
-
 		fruits.forEach((x, y) -> System.out.println(x + ":" + y));
 		// fruits.forEach(System::println);
 	}
