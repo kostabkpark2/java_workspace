@@ -9,11 +9,12 @@ public class IteratorDemo {
 
 	public static void main(String[] args) {
 
-		Collection<String> list = Arrays.asList("다람쥐", "개구리", "나비"); // immutable list
+		Collection<String> list = Arrays.asList("다람쥐", "개구리", "나비"); // 사이즈가 고정된 리스트
 		// list.add("라마"); // add 사용 불가
+		// list.remove("나비"); // remove 사용 불가
 		System.out.println(list.size());
 
-		Collection<String> list1 = new ArrayList<>(Arrays.asList("다람쥐", "개구리", "나비")); // mutable list
+		Collection<String> list1 = new ArrayList<>(Arrays.asList("다람쥐", "개구리", "나비")); // 사이즈가 증가하거나 줄어들 수 있는 리스트
 		list1.add("라마");
 		list1.add("나비");
 		System.out.println(list1.size());
