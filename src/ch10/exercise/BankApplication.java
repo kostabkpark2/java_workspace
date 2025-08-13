@@ -20,33 +20,17 @@ public class BankApplication {
 				-------------------------------------------------
 				선택>
 				""";
-		String msg1 = """
-				-------
-				계좌생성
-				-------""";
-		String msg2 = """
-				-------
-				계좌목록
-				-------""";
-		String msg3 = """
-				-------
-				예금
-				-------""";
-		String msg4 = """
-				-------
-				출금
-				-------""";
 
 		Scanner in = new Scanner(System.in);
 		Account[] accounts = new Account[100];
 		int index = 0;
 		String menu = "";
-		String accountNo = "";
-		String accountOwner = "";
-		long balance = 0;
-		String password = "";
-		String password1 = "";
-		long money = 0;
+//		String accountNo = "";
+//		String accountOwner = "";
+//		long balance = 0;
+//		String password = "";
+//		String password1 = "";
+//		long money = 0;
 		while (true) {
 			System.out.println(msg);
 			menu = in.nextLine();
@@ -56,69 +40,18 @@ public class BankApplication {
 			}
 			switch (menu) {
 			case "1" -> { // 계좌생성
-				System.out.println(msg1);
-				System.out.print("계좌번호 : ");
-				accountNo = in.nextLine();
-				System.out.print("계좌주 : ");
-				accountOwner = in.nextLine();
-				System.out.print("비밀번호 : ");
-				password = in.nextLine();
-				System.out.print("비밀번호 (재입력) : ");
-				password1 = in.nextLine();
-				System.out.print("초기 입금액 : ");
-				balance = Long.parseLong(in.nextLine());
-				// 계좌번호가 유일한지 체크 추가 ??? 어떻게 하는게 더 효율적인지 생각해보기
-				if (isDuplicated(accounts, index, accountNo)) {// 계좌번호 중복
-					System.out.println("계좌번호가 중복되어 계좌 생성을 할 수 없습니다ㅣ 다시 입력하세요");
-				} else if (accountNo.isBlank() || accountOwner.isBlank() || !password.equals(password1)
-						|| balance <= 0) {
-					System.out.println("계좌 생성을 위한 필수값이 입력되지 않았거나 비밀번호가 서로 다릅니다. 다시 입력하세요");
-				} else {
-					if (index <= 99) {
-						accounts[index] = new Account(accountNo, accountOwner, password, balance);
-						System.out.println("계좌가 생성되었습니다.");
-						index++;
-					} else {
-						System.out.println("더 이상 계좌를 생성할 수 없습니다. 관리자에게 연락하세요.");
-					}
+				if (createAccount(in, accounts, index)) {
+					index++;
 				}
 			}
 			case "2" -> { // 목록 출력
-				System.out.println(msg2);
-				for (int i = 0; i < index; i++) {
-					System.out.println(accounts[i]);
-				}
+				listAccounts(accounts, index);
 			}
 			case "3" -> { // 입금
-				System.out.println(msg3);
-				System.out.print("계좌번호 : ");
-				accountNo = in.nextLine();
-				System.out.print("입금액 : ");
-				money = Long.parseLong(in.nextLine());
-				int ind = findAccount(accounts, index, accountNo);
-				if (ind >= 0) { // 계좌를 찾은 경우
-					accounts[ind].deposit(money);
-					System.out.println("입금이 완료되었습니다.");
-				} else { // 해당 계좌를 못찾은 경우
-					System.out.println("입금할 계좌 정보가 없습니다.");
-				}
+				depositAccount(in, accounts, index);
 			}
 			case "4" -> { // 출금
-				System.out.println(msg4);
-				System.out.print("계좌번호 : ");
-				accountNo = in.nextLine();
-				int ind = findAccount(accounts, index, accountNo);
-				if (ind >= 0) { // 계좌를 찾은 경우
-					System.out.print("비밀번호 : ");
-					password = in.nextLine();
-					if (!password.isBlank() && accounts[ind].getPassword().equals(password)) {
-						System.out.print("출금액 : ");
-						money = Long.parseLong(in.nextLine());
-						accounts[ind].withdraw(money);
-					} else {
-						System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
-					}
-				}
+				withdrawAccount(in, accounts, index);
 			}
 			default -> System.out.println("메뉴 번호를 확인하세요");
 			}
@@ -143,4 +76,91 @@ public class BankApplication {
 		}
 		return -1;
 	}
+
+	private static boolean createAccount(Scanner in, Account[] accounts, int index) {
+		String msg1 = """
+				-------
+				계좌생성
+				-------""";
+		System.out.println(msg1);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		System.out.print("계좌주 : ");
+		String accountOwner = in.nextLine();
+		System.out.print("비밀번호 : ");
+		String password = in.nextLine();
+		System.out.print("비밀번호 (재입력) : ");
+		String password1 = in.nextLine();
+		System.out.print("초기 입금액 : ");
+		long balance = Long.parseLong(in.nextLine());
+		// 계좌번호가 유일한지 체크 추가 ??? 어떻게 하는게 더 효율적인지 생각해보기
+		if (isDuplicated(accounts, index, accountNo)) {// 계좌번호 중복
+			System.out.println("계좌번호가 중복되어 계좌 생성을 할 수 없습니다ㅣ 다시 입력하세요");
+		} else if (accountNo.isBlank() || accountOwner.isBlank() || !password.equals(password1) || balance <= 0) {
+			System.out.println("계좌 생성을 위한 필수값이 입력되지 않았거나 비밀번호가 서로 다릅니다. 다시 입력하세요");
+		} else {
+			if (index <= 99) {
+				accounts[index] = new Account(accountNo, accountOwner, password, balance);
+				System.out.println("계좌가 생성되었습니다.");
+//				index++;
+				return true;
+			} else {
+				System.out.println("더 이상 계좌를 생성할 수 없습니다. 관리자에게 연락하세요.");
+			}
+		}
+		return false;
+	}
+
+	private static void withdrawAccount(Scanner in, Account[] accounts, int index) {
+		String msg4 = """
+				-------
+				출금
+				-------""";
+		System.out.println(msg4);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		int ind = findAccount(accounts, index, accountNo);
+		if (ind >= 0) { // 계좌를 찾은 경우
+			System.out.print("비밀번호 : ");
+			String password = in.nextLine();
+			if (!password.isBlank() && accounts[ind].getPassword().equals(password)) {
+				System.out.print("출금액 : ");
+				long money = Long.parseLong(in.nextLine());
+				accounts[ind].withdraw(money);
+			} else {
+				System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
+			}
+		}
+	}
+
+	private static void depositAccount(Scanner in, Account[] accounts, int index) {
+		String msg3 = """
+				-------
+				예금
+				-------""";
+		System.out.println(msg3);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		System.out.print("입금액 : ");
+		long money = Long.parseLong(in.nextLine());
+		int ind = findAccount(accounts, index, accountNo);
+		if (ind >= 0) { // 계좌를 찾은 경우
+			accounts[ind].deposit(money);
+			System.out.println("입금이 완료되었습니다.");
+		} else { // 해당 계좌를 못찾은 경우
+			System.out.println("입금할 계좌 정보가 없습니다.");
+		}
+	}
+
+	private static void listAccounts(Account[] accounts, int index) {
+		String msg2 = """
+				-------
+				계좌목록
+				-------""";
+		System.out.println(msg2);
+		for (int i = 0; i < index; i++) {
+			System.out.println(accounts[i]);
+		}
+	}
+
 }
