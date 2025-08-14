@@ -44,12 +44,12 @@ public class BankApplication2 {
 			case "2" -> { // 목록 출력
 				listAccounts(accounts);
 			}
-//			case "3" -> { // 입금
-//				depositAccount(in, accounts);
-//			}
-//			case "4" -> { // 출금
-//				withdrawAccount(in, accounts, index);
-//			}
+			case "3" -> { // 입금
+				depositAccount(in, accounts);
+			}
+			case "4" -> { // 출금
+				withdrawAccount(in, accounts);
+			}
 			default -> System.out.println("메뉴 번호를 확인하세요");
 			}
 		}
@@ -102,54 +102,56 @@ public class BankApplication2 {
 			System.out.println(account);
 		}
 	}
-//	private static void withdrawAccount(Scanner in, Account[] accounts, int index) {
-//		String msg4 = """
-//				-------
-//				출금
-//				-------""";
-//		System.out.println(msg4);
-//		System.out.print("계좌번호 : ");
-//		String accountNo = in.nextLine();
-//		int ind = findAccount(accounts, index, accountNo);
-//		if (ind >= 0) { // 계좌를 찾은 경우
-//			System.out.print("비밀번호 : ");
-//			String password = in.nextLine();
-//			if (!password.isBlank() && accounts[ind].getPassword().equals(password)) {
-//				System.out.print("출금액 : ");
-//				long money = Long.parseLong(in.nextLine());
-//				accounts[ind].withdraw(money);
-//			} else {
-//				System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
-//			}
-//		}
-//	}
 
-//	private static void depositAccount(Scanner in, List<Account> accounts) {
-//		String msg3 = """
-//				-------
-//				예금
-//				-------""";
-//		System.out.println(msg3);
-//		System.out.print("계좌번호 : ");
-//		String accountNo = in.nextLine();
-//		System.out.print("입금액 : ");
-//		long money = Long.parseLong(in.nextLine());
-//		int ind = findAccount(accounts, index, accountNo);
-//		if (ind >= 0) { // 계좌를 찾은 경우
-//			accounts[ind].deposit(money);
-//			System.out.println("입금이 완료되었습니다.");
-//		} else { // 해당 계좌를 못찾은 경우
-//			System.out.println("입금할 계좌 정보가 없습니다.");
-//		}
-//	}
+	private static void withdrawAccount(Scanner in, List<Account> accounts) {
+		String msg4 = """
+				-------
+				출금
+				-------""";
+		System.out.println(msg4);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		int ind = findAccount(accounts, accountNo);
+		if (ind >= 0) { // 계좌를 찾은 경우
+			System.out.print("비밀번호 : ");
+			String password = in.nextLine();
+			if (!password.isBlank() && accounts.get(ind).getPassword().equals(password)) {
+				System.out.print("출금액 : ");
+				long money = Long.parseLong(in.nextLine());
+				accounts.get(ind).withdraw(money);
+			} else {
+				System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
+			}
+		}
+	}
 
-//	private static int findAccount(List<Account> accounts, String accountNo) {
-//		for
-//		for (int i = 0; i < size; i++) {
-//			if (arr[i].getAccountNo().equals(accountNo)) {
-//				return i;
-//			}
-//		}
-//		return -1;
-//	}
+	private static void depositAccount(Scanner in, List<Account> accounts) {
+		String msg3 = """
+				-------
+				예금
+				-------""";
+		System.out.println(msg3);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		System.out.print("입금액 : ");
+		long money = Long.parseLong(in.nextLine());
+		int ind = findAccount(accounts, accountNo);
+		System.out.println(ind);
+		if (ind >= 0) { // 계좌를 찾은 경우
+			accounts.get(ind).deposit(money);
+			System.out.println("입금이 완료되었습니다.");
+		} else { // 해당 계좌를 못찾은 경우
+			System.out.println("입금할 계좌 정보가 없습니다.");
+		}
+	}
+
+	private static int findAccount(List<Account> accounts, String accountNo) {
+		for (int i = 0; i < accounts.size(); i++) {
+			if (accounts.get(i).getAccountNo().equals(accountNo)) {
+				return i;
+			}
+			;
+		}
+		return -1;
+	}
 }
