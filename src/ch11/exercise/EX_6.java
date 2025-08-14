@@ -14,16 +14,17 @@ public class EX_6 {
 		int number = 0;
 
 		while (true) {
-			if (lotto.size() >= 6) {
-				break;
-			}
 			number = r.nextInt(1, 46);
 			if (lotto.contains(number)) {
 				continue;
 			} else {
 				lotto.add(number);
 			}
+			if (lotto.size() >= 6) {
+				break;
+			}
 		}
+
 		Collections.sort(lotto);
 		System.out.println(lotto);
 	}
