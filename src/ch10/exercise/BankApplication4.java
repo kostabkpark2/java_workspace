@@ -1,10 +1,10 @@
 package ch10.exercise;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class BankApplication2 {
+public class BankApplication4 {
 	// 요구사항 : 1. 계좌 생성할 때 반드시 초기 입금액을 0보다 크게 입력해야 한다.
 	// 계좌번호는 유일해야 함.
 	// - 비밀번호는 숫자 4자리로만 입력해야 함.(Optional)
@@ -24,12 +24,10 @@ public class BankApplication2 {
 				""";
 
 		Scanner in = new Scanner(System.in);
-		//
-		// List 대신 Key 로 검색을 쉽게 할 수 있도록, 자료구조를 변경하라.
-		// Map<String, Account>
-		//
-		// List<Account> accounts = new LinkedList<>();
-		Map<String, Account> accounts = new HashMap<>();
+		// 배열 대신 데이터를 무한정 담을 수 있는 ArrayList 룰 이용하여 프로그램을 수정해보기.
+		// Account[] accounts = new Account[100];
+		List<Account> accounts = new ArrayList<>();
+		// int index = 0;
 		String menu = "";
 
 		while (true) {
@@ -58,14 +56,16 @@ public class BankApplication2 {
 
 	}
 
-	private static boolean isDuplicated(Map<String, Account> accounts, String accountNo) {
-		if (accounts.containsKey(accountNo)) {
-			return true;
+	private static boolean isDuplicated(List<Account> accounts, String accountNo) {
+		for (Account account : accounts) {
+			if (account.getAccountNo().equals(accountNo)) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	private static void createAccount(Scanner in, Map<String, Account> accounts) {
+	private static void createAccount(Scanner in, List<Account> accounts) {
 		String msg1 = """
 				-------
 				계좌생성
@@ -87,23 +87,23 @@ public class BankApplication2 {
 		} else if (accountNo.isBlank() || accountOwner.isBlank() || !password.equals(password1) || balance <= 0) {
 			System.out.println("계좌 생성을 위한 필수값이 입력되지 않았거나 비밀번호가 서로 다릅니다. 다시 입력하세요");
 		} else {
-			accounts.put(accountNo, new Account(accountNo, accountOwner, password, balance));
+			accounts.add(new Account(accountNo, accountOwner, password, balance));
 			System.out.println("계좌가 생성되었습니다.");
 		}
 	}
 
-	private static void listAccounts(Map<String, Account> accounts) {
+	private static void listAccounts(List<Account> accounts) {
 		String msg2 = """
 				-------
 				계좌목록
 				-------""";
 		System.out.println(msg2);
-		for (Account account : accounts.values()) {
+		for (Account account : accounts) {
 			System.out.println(account);
 		}
 	}
 
-	private static void withdrawAccount(Scanner in, Map<String, Account> accounts) {
+	private static void withdrawAccount(Scanner in, List<Account> accounts) {
 		String msg4 = """
 				-------
 				출금
@@ -111,21 +111,21 @@ public class BankApplication2 {
 		System.out.println(msg4);
 		System.out.print("계좌번호 : ");
 		String accountNo = in.nextLine();
-		// int ind = findAccount(accounts, accountNo);
-		if (accounts.containsKey(accountNo)) { // 계좌를 찾은 경우
+		int ind = findAccount(accounts, accountNo);
+		if (ind >= 0) { // 계좌를 찾은 경우
 			System.out.print("비밀번호 : ");
 			String password = in.nextLine();
-			if (!password.isBlank() && accounts.get(accountNo).getPassword().equals(password)) {
+			if (!password.isBlank() && accounts.get(ind).getPassword().equals(password)) {
 				System.out.print("출금액 : ");
 				long money = Long.parseLong(in.nextLine());
-				accounts.get(accountNo).withdraw(money);
+				accounts.get(ind).withdraw(money);
 			} else {
 				System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
 			}
 		}
 	}
 
-	private static void depositAccount(Scanner in, Map<String, Account> accounts) {
+	private static void depositAccount(Scanner in, List<Account> accounts) {
 		String msg3 = """
 				-------
 				예금
@@ -135,23 +135,23 @@ public class BankApplication2 {
 		String accountNo = in.nextLine();
 		System.out.print("입금액 : ");
 		long money = Long.parseLong(in.nextLine());
-		// ind = findAccount(accounts, accountNo);
+		int ind = findAccount(accounts, accountNo);
 		// System.out.println(ind);
-		if (accounts.containsKey(accountNo)) { // 계좌를 찾은 경우
-			accounts.get(accountNo).deposit(money);
+		if (ind >= 0) { // 계좌를 찾은 경우
+			accounts.get(ind).deposit(money);
 			System.out.println("입금이 완료되었습니다.");
 		} else { // 해당 계좌를 못찾은 경우
 			System.out.println("입금할 계좌 정보가 없습니다.");
 		}
 	}
 
-//	private static int findAccount(Map<String, Account> accounts, String accountNo) {
-//		for (int i = 0; i < accounts.size(); i++) {
-//			if (accounts.get(i).getAccountNo().equals(accountNo)) {
-//				return i;
-//			}
-//		}
-//		return -1;
-//	}
+	private static int findAccount(List<Account> accounts, String accountNo) {
+		for (int i = 0; i < accounts.size(); i++) {
+			if (accounts.get(i).getAccountNo().equals(accountNo)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 }
