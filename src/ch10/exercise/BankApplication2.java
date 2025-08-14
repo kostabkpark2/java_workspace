@@ -103,6 +103,26 @@ public class BankApplication2 {
 		}
 	}
 
+	private static void depositAccount(Scanner in, Map<String, Account> accounts) {
+		String msg3 = """
+				-------
+				예금
+				-------""";
+		System.out.println(msg3);
+		System.out.print("계좌번호 : ");
+		String accountNo = in.nextLine();
+		System.out.print("입금액 : ");
+		long money = Long.parseLong(in.nextLine());
+		// ind = findAccount(accounts, accountNo);
+		// System.out.println(ind);
+		if (accounts.containsKey(accountNo)) { // 계좌를 찾은 경우
+			accounts.get(accountNo).deposit(money);
+			System.out.println("입금이 완료되었습니다.");
+		} else { // 해당 계좌를 못찾은 경우
+			System.out.println("입금할 계좌 정보가 없습니다.");
+		}
+	}
+
 	private static void withdrawAccount(Scanner in, Map<String, Account> accounts) {
 		String msg4 = """
 				-------
@@ -122,26 +142,6 @@ public class BankApplication2 {
 			} else {
 				System.out.println("비밀번호 불일치로 출금할 수 없습니다.");
 			}
-		}
-	}
-
-	private static void depositAccount(Scanner in, Map<String, Account> accounts) {
-		String msg3 = """
-				-------
-				예금
-				-------""";
-		System.out.println(msg3);
-		System.out.print("계좌번호 : ");
-		String accountNo = in.nextLine();
-		System.out.print("입금액 : ");
-		long money = Long.parseLong(in.nextLine());
-		// ind = findAccount(accounts, accountNo);
-		// System.out.println(ind);
-		if (accounts.containsKey(accountNo)) { // 계좌를 찾은 경우
-			accounts.get(accountNo).deposit(money);
-			System.out.println("입금이 완료되었습니다.");
-		} else { // 해당 계좌를 못찾은 경우
-			System.out.println("입금할 계좌 정보가 없습니다.");
 		}
 	}
 
