@@ -9,6 +9,13 @@ public class EX_4 {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		ArrayList<Integer> scores = new ArrayList<>();
+
+		scoreInput(in, scores);
+		scorePrint(scores);
+
+	}
+
+	public static void scoreInput(Scanner in, ArrayList<Integer> scores) { // 리팩토링 까지 해보기
 		int score = 0;
 		while (true) {
 			System.out.print("점수를 입력하세요 : ");
@@ -24,7 +31,9 @@ public class EX_4 {
 				continue;
 			}
 		}
+	}
 
+	public static void scorePrint(ArrayList<Integer> scores) {
 		Collections.sort(scores, Collections.reverseOrder());
 		int max = scores.get(0);
 //		System.out.println(scores.get(0));
@@ -39,7 +48,6 @@ public class EX_4 {
 			}
 			System.out.println(sc + " : " + grade);
 		}
-
 	}
 
 }
