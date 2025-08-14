@@ -40,5 +40,4 @@ public class EX_7 {
 		mean = (double) total / map.keySet().size();
 		System.out.printf("평균 점수 : %.2f \n", mean);
 	}
-
 }
