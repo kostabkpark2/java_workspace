@@ -38,8 +38,9 @@ public class SortedDemo {
 
 		// 국가 이름을 역순으로 정렬해서 출력하라. s 를 Object 으로 추론하기 때문에 reversed 를 붙여서 사용할 수 없음
 		// 매개변수가 많거나 복잡해지고, 추론이 애매한 경우면 Nation 이라고 타입을 확정해주기 때문에 메서드 참조를 사용할 것
-//		Nation.nations.stream().sorted(Comparator.comparing(s -> s.getName()).reversed())
-//				.forEach(Util::printWithParenthesis);
+		// 추론이 문제가 될 경우에는 객체의 타입을 명확하게 선언해주면 됨 (주의 !!!!!)
+		Nation.nations.stream().sorted(Comparator.comparing((Nation s) -> s.getName()).reversed())
+				.forEach(Util::printWithParenthesis);
 		System.out.println("\n국가 이름 역순 출력");
 		Nation.nations.stream().sorted(Comparator.comparing(Nation::getName).reversed())
 				.forEach(Util::printWithParenthesis);
