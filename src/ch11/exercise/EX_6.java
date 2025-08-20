@@ -10,23 +10,24 @@ public class EX_6 {
 	public static void main(String[] args) {
 		// 로또 6/45 생성
 		Random r = new Random();
-		List<Integer> lotto = new ArrayList<>();
-		int number = 0;
 
-		while (true) {
-			number = r.nextInt(1, 46);
-			if (lotto.contains(number)) {
-				continue;
-			} else {
-				lotto.add(number);
+		for (int i = 0; i < 3; i++) {
+			List<Integer> lotto = new ArrayList<>();
+			int number = 0;
+			while (true) {
+				number = r.nextInt(1, 46);
+				if (lotto.contains(number)) {
+					continue;
+				} else {
+					lotto.add(number);
+				}
+				if (lotto.size() >= 6) {
+					break;
+				}
 			}
-			if (lotto.size() >= 6) {
-				break;
-			}
+			Collections.sort(lotto);
+			System.out.println(lotto);
 		}
 
-		Collections.sort(lotto);
-		System.out.println(lotto);
 	}
-
 }

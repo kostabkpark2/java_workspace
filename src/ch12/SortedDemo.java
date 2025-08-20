@@ -27,6 +27,8 @@ public class SortedDemo {
 //		}).forEach(System.out::println);
 
 		System.out.println("\n숫자 역정렬");
+		// Stream.of(3, 5, 1, 7, 9).sorted((Integer o1, Integer o2) -> o2 -
+		// o1).forEach(Util::print);
 		Stream.of(3, 5, 1, 7, 9).sorted((o1, o2) -> o2 - o1).forEach(Util::print);
 		System.out.println("\n숫자 역정렬");
 		Stream.of(3, 5, 1, 7, 9).sorted(Comparator.reverseOrder()).forEach(Util::print);
