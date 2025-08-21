@@ -24,6 +24,18 @@ public class SLinkedListDemo {
 		System.out.println(list);
 		System.out.println(list.get(0));
 
+		list.add(1, 15);
+		System.out.println(list.size());
+		System.out.println(list);
+
+		list.add(0, 5);
+		System.out.println(list.size());
+		System.out.println(list);
+
+		list.add(6, -10);
+		System.out.println(list.size());
+		System.out.println(list);
+
 	}
 
 }

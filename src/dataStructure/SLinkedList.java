@@ -43,11 +43,6 @@ public class SLinkedList<E> {
 			tail.next = newNode;
 			size++;
 		}
-
-//        newNode.item = item;
-//        newNode.next = tail;
-		// < === 1) 여기를 구현한다.
-
 	}
 
 	void addFirst(E item) {
@@ -68,6 +63,30 @@ public class SLinkedList<E> {
 		// 데이터가 하나 추가되었기 때문에 리스트의 사이즈를 하나 증가시킨다.
 		// < === 3) 여기를 구현한다.
 		size++;
+	}
+
+	void add(int index, E item) {
+		// 1단계 : 새로운 노드를 생성한 후 node의 값을 설정한다.
+		// < === 1) 여기를 구현한다.
+		if (index == 0 || isEmpty()) {
+			addFirst(item);
+		} else if (index == size) {
+			addLast(item);
+		} else {
+			Node<E> newNode = new Node(item, null);
+			// 2단계 : 현재 데이터가 없는 경우, 즉 빈 리스트인 경우
+			// addFirst 와 동일하게 간다.
+
+			// 3단계 : 리스트에 데이터가 있을 경우에는 prev, aft 노드를 찾는다.
+			Node<E> prevNode = getNode(index - 1);
+			Node<E> aftNode = prevNode.next;
+			// 4단계 : prevNode 가 newNode 가리키고, newNode 는 aftNode 를 가리킨다.
+			prevNode.next = newNode;
+			newNode.next = aftNode;
+			// 5단계
+			// 데이터가 하나 추가되었기 때문에 리스트의 사이즈를 하나 증가시킨다.
+			size++;
+		}
 	}
 
 	E removeLast() {
@@ -99,6 +118,9 @@ public class SLinkedList<E> {
 	}
 
 	Node<E> getNode(int index) {
+		if (index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
 		Node<E> find = head;
 		// System.out.println(find.item);
 		for (int i = 0; i < index; i++) {

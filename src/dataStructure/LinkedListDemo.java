@@ -33,6 +33,12 @@ public class LinkedListDemo {
 		System.out.println(list);
 		System.out.println(list.removeLast());
 		System.out.println(list);
+
+		list.add(4, 10);
+		System.out.println(list);
+
+		list.add(10, -10);
+		System.out.println(list);
 	}
 
 }
