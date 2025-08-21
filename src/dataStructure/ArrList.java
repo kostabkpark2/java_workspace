@@ -19,11 +19,35 @@ public class ArrList<E> {
 			for (int i = 0; i < size(); i++) {
 				t[i] = a[i];
 			}
+			// t = Arrays.copyOf(a, size);
 			a = t;
 			System.out.println("after ==> 내부 부품 배열의 크기 " + length());
 		}
 		// 맨 마지막에 추가하고 배열의 size 를 증가시킨다. <==== (1. 여기 구현해보기)
 		a[size] = e;
+		size++;
+		return true;
+	}
+
+	public boolean add(int index, E e) { // 배열의 중간, index 의 위치에 항목을 추가하는 연산
+		if (length() == size()) {
+			// 배열의 사이즈를 2배 증가시킨다. <==== (1. 여기 구현해보기)
+			System.out.println("before ==> 내부 부품 배열의 크기 " + length());
+			E[] t = (E[]) (new Object[length() * 2]);
+
+			for (int i = 0; i < size(); i++) {
+				t[i] = a[i];
+			}
+//			t = Arrays.copyOf(a, size);
+			a = t;
+			System.out.println("after ==> 내부 부품 배열의 크기 " + length());
+		}
+		// index 의 위치에 항목을 추가하기 위해 index 부터 size - 1 까지의 항목들을 한칸씩 이동시킨다.
+		// 이 때 맨 마지막 항목부터 이동시켜야 함 주의 !!!
+		for (int i = size - 1; i >= index; i--) {
+			a[i + 1] = a[i];
+		}
+		a[index] = e;
 		size++;
 		return true;
 	}
@@ -53,6 +77,40 @@ public class ArrList<E> {
 			for (int i = 0; i < size(); i++) {
 				t[i] = a[i];
 			}
+//			t = Arrays.copyOf(a, size - 1);
+			// 기존배열을 없애고 새로만든 배열을 a 가 참조한다. <==== (3. 여기 구현해보기, 코드가 길어지고 재사용되면 나중에 리팩토링 하기)
+			a = t;
+			System.out.println("after ==> 내부 부품 배열의 크기 " + length());
+
+		}
+		return removed; // 백업 받아놓은 삭제된 요소를 반환한다. <==== (3. 여기 구현해보기)
+	}
+
+	public E remove(int index) {// index 번째 요소를 삭제하는 연산
+		if (isEmpty()) {// underflow 의 경우에 프로그램 정지 ==> ArrayList 와 동일한 exception 찾아서 구현하기
+			throw new IndexOutOfBoundsException();
+		}
+		// index 번째 요소를 삭제하기 전 백업을 받고, 삭제한다.
+		E removed = a[index];
+		a[index] = null;
+		// index + 1 ~ size - 1 위치의 항목들을 한칸씩 앞으로 이동시킨다.
+		// 이 때 맨 index + 1 항목부터 이동시켜야 함 주의 !!!
+		for (int i = index + 1; i < size; i++) {
+			a[i - 1] = a[i];
+		}
+		// 배열의 size 를 감소시킨다. <==== (3. 여기 구현해보기)
+		size--;
+
+		if (size > 0 && size <= length() / 4) {
+			// 배열의 크기를 반으로 줄인다.
+			System.out.println("before ==> 내부 부품 배열의 크기 " + length());
+			E[] t = (E[]) (new Object[length() / 2]);
+
+			// 기존배열의 값을 새로 만든 배열로 옮긴다.
+			for (int i = 0; i < size(); i++) {
+				t[i] = a[i];
+			}
+//			t = Arrays.copyOf(a, size - 1);
 			// 기존배열을 없애고 새로만든 배열을 a 가 참조한다. <==== (3. 여기 구현해보기, 코드가 길어지고 재사용되면 나중에 리팩토링 하기)
 			a = t;
 			System.out.println("after ==> 내부 부품 배열의 크기 " + length());

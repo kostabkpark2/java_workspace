@@ -26,11 +26,13 @@ public class ArrListDemo {
 		System.out.println("size ==> " + list.size());
 		System.out.println(list);
 
-//		list.add(1, 50);
-//		System.out.println(list);
-//
+		list.add(1, 50);
+		System.out.println(list);
+		list.add(0, 60);
+		System.out.println(list);
+
 		while (!list.isEmpty()) {
-			Integer removed = list.remove();
+			Integer removed = list.remove(0);
 			System.out.println(removed);
 			System.out.println("size ==> " + list.size());
 		}
