@@ -5,6 +5,8 @@ public class SLinkedListDemo {
 	public static void main(String[] args) {
 		SLinkedList<Integer> list = new SLinkedList<>();
 
+		// list.removeFirst();
+
 		System.out.println(list.isEmpty());
 		System.out.println(list.size());
 		System.out.println(list);
@@ -12,6 +14,11 @@ public class SLinkedListDemo {
 		list.addFirst(10);
 		System.out.println(list.size());
 		System.out.println(list);
+
+		System.out.println(list.removeFirst());
+		System.out.println(list.size());
+		System.out.println(list);
+
 		list.addFirst(20);
 		System.out.println(list.size());
 		System.out.println(list);
@@ -32,7 +39,7 @@ public class SLinkedListDemo {
 		System.out.println(list.size());
 		System.out.println(list);
 
-		list.add(6, -10);
+		list.add(list.size(), -10);
 		System.out.println(list.size());
 		System.out.println(list);
 

@@ -36,10 +36,11 @@ public class SLinkedList<E> {
 	}
 
 	void addLast(E item) {
-		Node<E> newNode = new Node<>(item, null);
+		// Node<E> newNode = new Node<>(item, null);
 		if (isEmpty()) {
 			addFirst(item);
 		} else {
+			Node<E> newNode = new Node<>(item, null);
 			tail.next = newNode;
 			size++;
 		}
@@ -66,13 +67,13 @@ public class SLinkedList<E> {
 	}
 
 	void add(int index, E item) {
-		// 1단계 : 새로운 노드를 생성한 후 node의 값을 설정한다.
-		// < === 1) 여기를 구현한다.
 		if (index == 0 || isEmpty()) {
 			addFirst(item);
 		} else if (index == size) {
 			addLast(item);
 		} else {
+			// 1단계 : 새로운 노드를 생성한 후 node의 값을 설정한다.
+			// < === 1) 여기를 구현한다.
 			Node<E> newNode = new Node(item, null);
 			// 2단계 : 현재 데이터가 없는 경우, 즉 빈 리스트인 경우
 			// addFirst 와 동일하게 간다.
@@ -107,11 +108,17 @@ public class SLinkedList<E> {
 	}
 
 	E removeFirst() {
+		if (isEmpty()) {
+			throw new IndexOutOfBoundsException();
+		}
+		// 지워지는 노드를 백업 받아놓음
 		Node<E> removedNode = head;
+		// head 를 갱신
 		head = head.next;
+		// 지워지는 노드 정리
 		removedNode.next = null;
 		if (size == 1) {
-			head = null;
+			head = tail = null;
 		}
 		size--;
 		return removedNode.item;
