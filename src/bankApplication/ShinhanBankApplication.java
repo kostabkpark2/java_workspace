@@ -1,7 +1,6 @@
 package bankApplication;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -35,73 +34,38 @@ public class ShinhanBankApplication {
 		System.out.print(biz1);
 		System.out.print("업무 구분 코드 > ");
 		String menu = in.nextLine();
-		if (menu.equals("1")) { // 입력 --> 계좌개설
+		if (menu.equals("1")) { // 계좌개설
+			System.out.println("계좌 개설중 ");
 			// ==> 프로그램이 길어지면 메서드로 리팩토링 하면 됨.
-			System.out.print("주민번호 앞 6자리를 입력하세요 > "); // 입력 --> 고객 정보
-			clientNo = in.nextLine();
-			if (clientNo != null && clientNo.length() == 6 && clientNo.chars().allMatch(Character::isDigit)) {
-				client = clientMap.get(clientNo);
-				if (client == null) { // 신규 고객
-					System.out.print("고객명을 입력하세요 > ");
-					clientName = in.nextLine();
-					client = new Client(BankCode.신한, clientNo, clientName);
-					clientMap.put(clientNo, client);
-					// 고객 정보 생성 후 map 에 추가
-				} else { // 기존 고객
-				}
-			}
+			// 신규 고객인 경우와 기존 고객의 경우 처리 달라짐
+
 			// 처리 --> 계좌 개설 / Client, Account
-			while (true) {
-				randomAccNo = String.valueOf(random.nextInt(99999) + 1);
-				// 계좌번호는 랜덤하게 생성
-				if (accountMap.get(random) == null) {
-					// 랜덤하게 생성한 코드가 기존에 없는 코드라면 해당코드를 이용해 계좌생성하고 while문 종료
-					break;
-				} else {
-					// 기존에 존재하는 코드이면 다시 랜덤하게 생성하기
-					continue;
-				}
-			}
+//			while (true) {
+//				randomAccNo = String.valueOf(random.nextInt(99999) + 1);
+//				// 계좌번호는 랜덤하게 생성
+//				
+//			}
 
-			while (true) {
-				System.out.print("계좌개설시 입금하실 금액을 입력하세요 > ");
-				balance = Long.parseLong(in.nextLine());
-				System.out.print("입금하려는 금액이 " + balance + "가 맞습니까 ? (Y/N) > ");
-				if (in.nextLine().equalsIgnoreCase("y")) {
-					break;
-				} else {
-					continue;
-				}
-			}
+//			while (true) {
+//				System.out.print("계좌개설시 입금하실 금액을 입력하세요 > ");
+//				if() {
+//					break;
+//				}
+//			}
 
-			account = new Account(BankCode.신한, randomAccNo, client, balance);
-			accountMap.put(randomAccNo, account);
-			while (true) { // 비밀번호 입력을 정상적으로 했을 때 빠져나오게 하기, 오류 있으면 다시 입력받기
-				System.out.print("사용하실 비밀번호를 숫자 4자리로 입력해주세요 > ");
-				passwd1 = in.nextLine();// 입력 --> 비밀 번호
-				System.out.print("비밀번호 확인 (숫자 4자리) > ");
-				passwd2 = in.nextLine();
-				if (passwd1 != null && passwd2 != null && passwd1.length() == 4 && passwd2.length() == 4
-						&& passwd1.chars().allMatch(Character::isDigit) && passwd2.chars().allMatch(Character::isDigit)
-						&& passwd1.equals(passwd2)) {
-					account.passwd = passwd1;
-					break;
-				} else {
-					System.out.println("입력된 암호가 바르지 않습니다. 다시 입력해주세요.");
-					continue;
-				}
-			}
+//			account = new Account(BankCode.신한, randomAccNo, client, balance);
+//			accountMap.put(randomAccNo, account);
+//			while (true) { // 비밀번호 입력을 정상적으로 했을 때 빠져나오게 하기, 오류 있으면 다시 입력받기
+//				System.out.print("사용하실 비밀번호를 숫자 4자리로 입력해주세요 > ");
+//			
+//			
+//			}
 			// 처리 --> 계좌 개설 완료 / Transaction , Account
-			transaction = new Transaction(BankCode.신한, account, TransactionCode.개설, balance, bankClerk);
-			transaction.trStatus = TransactionStatus.정상;
-			List<Transaction> trList = new LinkedList<>();
-			trList.add(transaction);
-			transactionMap.put(account, trList);
-			System.out.println("계좌개설이 완료되었습니다.");
-			System.out.println(client);
-			System.out.println(account);
-			System.out.println(bankClerk);
-			System.out.println(trList.get(0));
+
+		} else if (menu.equals("2")) {
+			System.out.println("입금 처리 중 ");
+		} else if (menu.equals("3")) {
+			System.out.println("출금 처리 중 ");
 		} else if (menu.equals("0")) {
 			System.out.println("은행 업무를 종료합니다.");
 			return;
