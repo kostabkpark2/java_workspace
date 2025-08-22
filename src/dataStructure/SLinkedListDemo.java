@@ -15,9 +15,17 @@ public class SLinkedListDemo {
 		System.out.println(list.size());
 		System.out.println(list);
 
-		System.out.println(list.removeFirst());
-		System.out.println(list.size());
-		System.out.println(list);
+		if (!list.isEmpty()) {
+			list.remove(0);
+			System.out.println(list.size());
+			System.out.println(list);
+		}
+
+		if (!list.isEmpty()) {
+			System.out.println(list.removeFirst());
+			System.out.println(list.size());
+			System.out.println(list);
+		}
 
 		list.addFirst(20);
 		System.out.println(list.size());
@@ -43,6 +51,9 @@ public class SLinkedListDemo {
 		System.out.println(list.size());
 		System.out.println(list);
 
+		System.out.println(list.remove(2) + "가 지워짐");
+		System.out.println(list.size());
+		System.out.println(list);
 	}
 
 }

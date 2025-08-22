@@ -107,6 +107,28 @@ public class SLinkedList<E> {
 		return null;
 	}
 
+	E remove(int index) {
+		if (index == 0) {
+			return removeFirst();
+		}
+		// 1단계 : index 번째 노드를 지우기 전 백업받아놓는다. tobeDeleted
+		Node<E> tobeDeleted = getNode(index);
+		// 2-1단계 : 데이터가 2개 이상인 경우 (즉, 마지막 노드를 지워도 리스트가 비어있지 않은 경우)
+		// 지우려는 노드의 바로 이전 노드를 찾아온다.
+		Node<E> prev = getNode(index - 1);
+		// 2-2단계 : 데이터가 2개 이상인 경우, prev 와 삭제되는 노드의 다음 노드와 연결
+		if (tobeDeleted == tail) {
+			tail = prev;
+		}
+		prev.next = tobeDeleted.next;
+		// 2-3단계 : 노드를 삭제
+		tobeDeleted.next = null;
+		// 3단계 : 사이즈 감소
+		size--;
+		// 4단계 : 지워진 아이템 반환
+		return tobeDeleted.item;
+	}
+
 	E removeFirst() {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
