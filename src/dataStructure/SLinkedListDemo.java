@@ -4,6 +4,7 @@ public class SLinkedListDemo {
 
 	public static void main(String[] args) {
 		SLinkedList<Integer> list = new SLinkedList<>();
+		System.out.println(list.indexOf(10));
 
 		// list.removeFirst();
 
@@ -14,6 +15,7 @@ public class SLinkedListDemo {
 		list.addFirst(10);
 		System.out.println(list.size());
 		System.out.println(list);
+		System.out.println(list.indexOf(10));
 
 		if (!list.isEmpty()) {
 			list.remove(0);
@@ -54,6 +56,13 @@ public class SLinkedListDemo {
 		System.out.println(list.remove(2) + "가 지워짐");
 		System.out.println(list.size());
 		System.out.println(list);
+
+		list.add(4, 10);
+		list.add(2, 10);
+		System.out.println(list.size());
+		System.out.println(list);
+
+		System.out.println(list.indexOf(10));
 	}
 
 }

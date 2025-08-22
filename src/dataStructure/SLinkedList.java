@@ -91,6 +91,7 @@ public class SLinkedList<E> {
 	}
 
 	E removeLast() {
+		return remove(size - 1);
 		// 1단계 : 맨 마지막 노드를 지우기 전 백업받아놓는다. removedNode
 
 		// 2-1단계 : 데이터가 2개 이상인 경우 (즉, 마지막 노드를 지워도 리스트가 비어있지 않은 경우)
@@ -104,7 +105,7 @@ public class SLinkedList<E> {
 		// 3단계 : 노드가 하나 삭제되었기 때문에 사이즈를 하나 줄여준다.
 
 		// 4단계 : 삭제된 노드(백업받아놓음)를 반환한다.
-		return null;
+
 	}
 
 	E remove(int index) {
@@ -112,10 +113,11 @@ public class SLinkedList<E> {
 			return removeFirst();
 		}
 		// 1단계 : index 번째 노드를 지우기 전 백업받아놓는다. tobeDeleted
-		Node<E> tobeDeleted = getNode(index);
 		// 2-1단계 : 데이터가 2개 이상인 경우 (즉, 마지막 노드를 지워도 리스트가 비어있지 않은 경우)
 		// 지우려는 노드의 바로 이전 노드를 찾아온다.
 		Node<E> prev = getNode(index - 1);
+		Node<E> tobeDeleted = prev.next;
+
 		// 2-2단계 : 데이터가 2개 이상인 경우, prev 와 삭제되는 노드의 다음 노드와 연결
 		if (tobeDeleted == tail) {
 			tail = prev;
@@ -159,6 +161,18 @@ public class SLinkedList<E> {
 		return find;
 	}
 
+	int indexOf(E item) {
+		Node<E> temp = head;
+		int findIndex = -1;
+		for (int i = 0; i < size - 1; i++) {
+			if (temp.item == item) {
+				findIndex = i;
+				break;
+			}
+			temp = temp.next;
+		}
+		return findIndex;
+	}
 	// size , isEmpty 등 편의 메서드를 구현
 
 	public int size() {
